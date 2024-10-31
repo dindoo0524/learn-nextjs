@@ -1,7 +1,3 @@
-interface IParams {
-  params: { id: string };
-}
-
 interface FinancialAsset {
   exchange: string;
   ticker: string;
@@ -44,8 +40,12 @@ function formatNetWorthToBillion(netWorth: number): string {
   return `${netWorthInBillions} Billion`;
 }
 
-export default async function DetailPage({ params }: IParams) {
-  const { id } = await params;
+export default async function DetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
   const billion = await getBillion(id);
   const netWorthInBillions = formatNetWorthToBillion(billion.netWorth);
 
