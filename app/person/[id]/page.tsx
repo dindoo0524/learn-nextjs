@@ -92,7 +92,7 @@ export default async function DetailPage({ params }: IParams) {
       <div className="p-4">
         <h4 className="text-blue-400 bg-black p-4">Financial Assets</h4>
         <div className="grid grid-cols-2 gap-5 my-10">
-          {billion.financialAssets.map((asset: any, index: number) => (
+          {billion.financialAssets.map((asset, index: number) => (
             <div className="p-10 bg-yellow-500 rounded-3xl" key={index}>
               <p>Ticker: {asset.ticker}</p>
               <p>Company: {asset.companyName}</p>
