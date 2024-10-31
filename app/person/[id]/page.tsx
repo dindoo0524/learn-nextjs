@@ -13,16 +13,15 @@ interface FinancialAsset {
 
 interface Billion {
   id: string;
-  state: string;
-  city: string;
+  state?: string;
+  city?: string;
   name: string;
-  country: string;
-  position: number;
-  industries: string[];
+  country?: string;
+  industries?: string[];
   financialAssets?: FinancialAsset[];
-  squareImage: string;
-  bio: string[];
-  about: string[];
+  squareImage?: string;
+  bio?: string[];
+  about?: string[];
   netWorth: number;
 }
 
@@ -62,30 +61,33 @@ export default async function DetailPage({
           <p>Country: {billion.country} </p>
           <p>
             industries:
-            {billion.industries.map((industry: string, index: number) => (
-              <span className="bg-green-400 text-slate-600" key={index}>
-                {industry}
-              </span>
-            ))}
+            {billion.industries &&
+              billion.industries.map((industry: string, index: number) => (
+                <span className="bg-green-400 text-slate-600" key={index}>
+                  {industry}
+                </span>
+              ))}
           </p>
         </div>
       </div>
       <div className="p-4">
         <h4 className="text-green-400 bg-black p-4">ABOUT</h4>
-        {billion.about.map((el: string, index: number) => (
-          <p className="py-4" key={index}>
-            * {el}
-          </p>
-        ))}
+        {billion.about &&
+          billion.about.map((el: string, index: number) => (
+            <p className="py-4" key={index}>
+              * {el}
+            </p>
+          ))}
       </div>
 
       <div className="p-4">
         <h4 className="text-blue-400 bg-black p-4">BIO</h4>
-        {billion.bio.map((el: string, index: number) => (
-          <p className="py-4" key={index}>
-            * {el}
-          </p>
-        ))}
+        {billion.bio &&
+          billion.bio.map((el: string, index: number) => (
+            <p className="py-4" key={index}>
+              * {el}
+            </p>
+          ))}
       </div>
 
       <div className="p-4">
