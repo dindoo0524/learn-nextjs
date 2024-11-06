@@ -26,7 +26,7 @@ export default function Billion({
   const router = useRouter();
   const netWorthInBillions = formatNetWorthToBillion(netWorth);
   const onClick = () => {
-    router.push(`/person/${id}`);
+    router.push(`/billionaires/person/${id}`);
   };
 
   return (
