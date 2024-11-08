@@ -27,7 +27,7 @@ export default function LoginPage() {
               type="email"
               placeholder="Email"
               required
-              errors={[]}
+              errors={state?.errors?.email ?? []}
               icon={<EnvelopeIcon />}
             />
             <FormInput
@@ -35,7 +35,7 @@ export default function LoginPage() {
               type="text"
               placeholder="Username"
               required
-              errors={[]}
+              errors={state?.errors?.name ?? []}
               icon={<UserIcon />}
             />
             <FormInput
@@ -43,7 +43,7 @@ export default function LoginPage() {
               type="password"
               placeholder="Password"
               required
-              errors={state?.errors ?? []}
+              errors={state?.errors?.password ?? []}
               icon={<KeyIcon />}
             />
             <FormButton text="Log in" />
