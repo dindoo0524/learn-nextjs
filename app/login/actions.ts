@@ -22,6 +22,7 @@ const formSchema = z.object({
     ),
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function handleForm(prevState: any, formData: FormData) {
   const data = {
     email: formData.get("email"),
