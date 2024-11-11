@@ -1,5 +1,6 @@
 "use client";
 
+import "@/lib/db";
 import FormButton from "@/components/form-btn";
 import FormInput from "@/components/form-input";
 import { handleForm } from "./actions";
