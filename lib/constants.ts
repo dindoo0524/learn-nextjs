@@ -4,3 +4,4 @@ export const PASSWORD_REGEX = new RegExp(
 );
 export const PASSWORD_REGEX_ERROR =
   "Passwords must contain at least one UPPERCASE, lowercase, number and special characters #?!@$%^&*-";
+export const PAGE_SIZE = 3;
