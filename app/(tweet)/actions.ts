@@ -10,6 +10,12 @@ export async function getMoreTweets(page: number) {
       created_at: true,
       updated_at: true,
       id: true,
+      user: {
+        select: {
+          username: true,
+          email: true,
+        },
+      },
     },
     skip: page * PAGE_SIZE,
     take: PAGE_SIZE,
