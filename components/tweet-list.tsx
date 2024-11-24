@@ -32,17 +32,19 @@ export default function TweetList({ initialTweets }: TweetListProps) {
     setIsLoading(false);
   };
   return (
-    <div className="p-5 flex flex-col gap-5 bg-blue-300">
-      {tweets.map((tweet) => (
-        <ListTweet key={tweet.id} {...tweet} />
-      ))}
+    <div className="p-5 flex flex-col gap-5 border-2 border-gray-300 rounded-lg">
+      <div className="flex flex-col gap-5">
+        {tweets.map((tweet) => (
+          <ListTweet key={tweet.id} {...tweet} />
+        ))}
+      </div>
 
       <div className="flex justify-center">
         {!isFirstPage && (
           <button
             onClick={() => onLoadMoreClick("prev")}
             disabled={isLoading}
-            className="text-sm font-semibold bg-blue-500 w-fit mx-auto px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
+            className="text-sm text-white font-semibold bg-blue-500 w-fit mx-auto px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
           >
             {isLoading ? "로딩 중" : "이전"}
           </button>
@@ -52,7 +54,7 @@ export default function TweetList({ initialTweets }: TweetListProps) {
           <button
             onClick={() => onLoadMoreClick("next")}
             disabled={isLoading}
-            className="text-sm font-semibold bg-blue-500 w-fit mx-auto px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
+            className="text-sm text-white font-semibold bg-blue-500 w-fit mx-auto px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
           >
             {isLoading ? "로딩 중" : "다음"}
           </button>

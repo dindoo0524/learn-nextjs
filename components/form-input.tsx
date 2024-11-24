@@ -5,6 +5,7 @@ interface FormInputProps {
   errors: string[];
   name: string;
   icon?: React.ReactNode;
+  className?: string;
 }
 
 export default function FormInput({
@@ -14,9 +15,10 @@ export default function FormInput({
   errors,
   name,
   icon,
+  className,
 }: FormInputProps) {
   return (
-    <div>
+    <div className={className}>
       <div className="flex flex-col gap-2 relative">
         {icon && (
           <div className="w-4 absolute inset-y-0  flex items-center left-2">
@@ -25,7 +27,7 @@ export default function FormInput({
         )}
         <input
           name={name}
-          className="pl-10 bg-transparent rounded-md w-full h-10 focus:outline-none ring-2 focus:ring-4 transition ring-neutral-200 focus:ring-blue-500 border-none placeholder:text-neutral-400"
+          className="pl-4 bg-transparent rounded-md w-full h-10 focus:outline-none ring-2 focus:ring-4 transition ring-neutral-200 focus:ring-blue-500 border-none placeholder:text-neutral-400"
           type={type}
           placeholder={placeholder}
           required={required}

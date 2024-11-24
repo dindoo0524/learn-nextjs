@@ -16,6 +16,12 @@ export async function getMoreTweets(page: number) {
           email: true,
         },
       },
+      _count: {
+        select: {
+          likes: true,
+          comments: true,
+        },
+      },
     },
     skip: page * PAGE_SIZE,
     take: PAGE_SIZE,

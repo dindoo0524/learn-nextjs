@@ -17,6 +17,7 @@ model User {
   updated_at DateTime @updatedAt
   tweets     Tweet[]
   likes      Like[]
+  comments   Comment[]
 }
 
 model Tweet {
@@ -24,16 +25,30 @@ model Tweet {
   tweet      String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  user       User     @relation(fields: [user_id], references: [id])
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id    Int
   likes      Like[]
+  comments   Comment[]
 }
 
+
 model Like {
-  id         Int      @id @default(autoincrement())
+  @@id(name : "id", [user_id, tweet_id])
   created_at DateTime @default(now())
-  user       User     @relation(fields: [user_id], references: [id])
+  updated_at DateTime @updatedAt
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id    Int
-  tweet      Tweet    @relation(fields: [tweet_id], references: [id])
+  tweet      Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
+  tweet_id   Int
+}
+
+model Comment {
+  id         Int      @id @default(autoincrement())
+  comment    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    Int
+  tweet      Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
   tweet_id   Int
 }

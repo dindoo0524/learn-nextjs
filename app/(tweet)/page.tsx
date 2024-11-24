@@ -17,12 +17,19 @@ async function getInitialTweets() {
           email: true,
         },
       },
+      _count: {
+        select: {
+          likes: true,
+          comments: true,
+        },
+      },
     },
     take: PAGE_SIZE,
     orderBy: {
       created_at: "desc",
     },
   });
+
   return tweets;
 }
 

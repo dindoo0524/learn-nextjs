@@ -37,10 +37,10 @@ export default async function Profile() {
       </div>
       <div>
         <Link
-          href="/products"
-          className="primary-btn flex h-10 items-center justify-center gap-2 mt-5"
+          href="/"
+          className="primary-btn flex h-10 items-center justify-center gap-2 mt-5 text-lg p-10"
         >
-          Go to Market Products
+          Go to Tweets 🧚
         </Link>
       </div>
       <h3 className="text-center my-5">Are you want to log out? 👇</h3>

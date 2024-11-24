@@ -3,9 +3,13 @@
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { tweetSchema } from "@/schemas/tweet-schema";
+import { redirect } from "next/navigation";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function addTweet(prevState: any, formData: FormData) {
+export async function addTweet(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  prevState: any,
+  formData: FormData
+) {
   const data = {
     tweet: formData.get("tweet"),
   };
@@ -33,7 +37,7 @@ export async function addTweet(prevState: any, formData: FormData) {
         },
       });
 
-      return { result: true };
+      redirect("/");
     }
   }
 }

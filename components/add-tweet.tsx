@@ -11,17 +11,32 @@ export default function AddTweet() {
   return (
     <form
       action={action}
-      className="p-5 flex flex-col gap-5 bg-blue-100 mb-10 rounded-lg"
+      className="p-6 flex flex-col gap-5 bg-white border border-gray-100 shadow-sm mb-10 rounded-xl hover:shadow-md transition-shadow"
     >
-      오늘 무슨 일이 있었나요? 오늘의 Tweet을 남겨주세요.
-      <FormInput
-        name="tweet"
-        required
-        placeholder="Tweet"
-        type="text"
-        errors={state?.errors?.tweet ?? []}
-      />
-      <Button text="등록" />
+      <div className="flex items-center gap-3">
+        <span className="text-2xl">✏️</span>
+        <h2 className="text-lg font-medium text-gray-800">
+          오늘 무슨 일이 있었나요?
+        </h2>
+      </div>
+
+      <div className="space-y-2">
+        <FormInput
+          name="tweet"
+          required
+          placeholder="여러분의 이야기를 들려주세요..."
+          type="text"
+          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all"
+          errors={state?.errors?.tweet ?? []}
+        />
+      </div>
+
+      <div className="flex justify-end">
+        <Button
+          text="트윗 작성하기"
+          className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2.5 rounded-lg font-medium transition-colors"
+        />
+      </div>
     </form>
   );
 }
