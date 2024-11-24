@@ -20,7 +20,7 @@ async function getInitialTweets() {
       _count: {
         select: {
           likes: true,
-          comments: true,
+          responses: true,
         },
       },
     },

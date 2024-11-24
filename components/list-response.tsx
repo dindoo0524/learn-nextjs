@@ -1,13 +1,8 @@
 import { formatToTimeAgo } from "@/lib/utils";
-import {
-  FaceSmileIcon,
-  HeartIcon,
-  ChatBubbleOvalLeftIcon,
-} from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { FaceSmileIcon } from "@heroicons/react/24/outline";
 
-interface ListTweetProps {
-  tweet: string;
+interface ListResponseProps {
+  response: string;
   created_at: Date;
   updated_at: Date;
   id: number;
@@ -15,24 +10,15 @@ interface ListTweetProps {
     username: string;
     email: string | null;
   };
-  _count: {
-    likes: number;
-    responses: number;
-  };
 }
 
-export default function ListTweet({
-  tweet,
+export default function ListResponse({
+  response,
   created_at,
-  id,
   user,
-  _count: { likes, responses },
-}: ListTweetProps) {
+}: ListResponseProps) {
   return (
-    <Link
-      href={`/tweets/${id}`}
-      className="flex gap-5 p-4 hover:bg-blue-100 transition-colors border-b border-gray-700 last:border-b-0"
-    >
+    <div className="flex gap-5 p-4  transition-colors border-b border-gray-700 last:border-b-0">
       {/* 왼쪽 트윗 아이콘 */}
       <div className="relative w-24 h-24 rounded-xl overflow-hidden bg-gradient-to-br from-yellow-100 to-yellow-200 flex items-center justify-center shadow-sm">
         <span className="text-2xl">🕊️</span>
@@ -42,7 +28,7 @@ export default function ListTweet({
       <div className="flex flex-col flex-1 gap-2">
         {/* 트윗 내용 */}
         <p className="text-base text-blue-900 line-clamp-3 hover:line-clamp-none transition-all">
-          {tweet}
+          {response}
         </p>
 
         {/* 유저 정보 */}
@@ -57,28 +43,12 @@ export default function ListTweet({
           )}
         </div>
 
-        {/* 인터랙션 정보 */}
         <div className="flex items-center gap-6 text-sm">
-          <div className="flex items-center gap-1.5 group">
-            <HeartIcon className="w-5 h-5 text-black group-hover:text-red-500 transition-colors" />
-            <span className="font-medium text-black group-hover:text-red-500 transition-colors">
-              {likes.toLocaleString()}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-1.5 group">
-            <ChatBubbleOvalLeftIcon className="w-5 h-5 text-black group-hover:text-blue-500 transition-colors" />
-            <span className="font-medium text-black group-hover:text-blue-500 transition-colors">
-              {responses.toLocaleString()}
-            </span>
-          </div>
-
-          {/* 작성 시간 */}
           <span className="text-sm text-black ml-auto">
             {formatToTimeAgo(created_at.toString())}
           </span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

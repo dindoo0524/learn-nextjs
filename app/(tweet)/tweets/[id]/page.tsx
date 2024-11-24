@@ -4,8 +4,34 @@ import { formatToTimeAgo } from "@/lib/utils";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { unstable_cache as nextCache, revalidateTag } from "next/cache";
+import { unstable_cache as nextCache } from "next/cache";
 import LikeButton from "@/components/like-button";
+import ResponseList from "@/components/response-list";
+import { getResponses } from "./actions";
+
+function getCachedResponses(tweetId: number) {
+  const cachedResponses = nextCache(getResponses, ["responses"], {
+    tags: [`responses-${tweetId}`],
+  });
+  return cachedResponses(tweetId);
+}
+
+async function getMe() {
+  const mySession = await getSession();
+  const me = mySession.id
+    ? await db.user.findUnique({
+        where: {
+          id: mySession.id,
+        },
+        select: {
+          id: true,
+          username: true,
+          email: true,
+        },
+      })
+    : null;
+  return me;
+}
 
 async function getCachedLikeStatus(tweetId: number) {
   const session = await getSession();
@@ -39,11 +65,6 @@ async function getLikeStatus(tweetId: number, userId: number | undefined) {
   };
 }
 
-const getCachedTweet = nextCache(getTweet, ["tweet"], {
-  tags: ["tweet"],
-  revalidate: 60,
-});
-
 async function getTweet(id: number) {
   const tweet = await db.tweet.findUnique({
     where: {
@@ -60,7 +81,7 @@ async function getTweet(id: number) {
       _count: {
         select: {
           likes: true,
-          comments: true,
+          responses: true,
         },
       },
     },
@@ -81,8 +102,9 @@ export default async function TweetDetail({ params }: { params: Params }) {
     return notFound();
   }
 
+  const me = await getMe();
+  const allResponses = await getCachedResponses(numericId);
   const { isLiked, likeCount } = await getCachedLikeStatus(numericId);
-  // const isOwner = await getIsOwner(tweet.user.id);
   return (
     <div className="max-w-2xl mx-auto p-6">
       <Link
@@ -111,6 +133,10 @@ export default async function TweetDetail({ params }: { params: Params }) {
             </p>
           </div>
         </div>
+      </div>
+
+      <div>
+        <ResponseList tweetId={numericId} allResponses={allResponses} me={me} />
       </div>
     </div>
   );

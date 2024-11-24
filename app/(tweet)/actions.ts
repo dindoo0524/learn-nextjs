@@ -19,7 +19,7 @@ export async function getMoreTweets(page: number) {
       _count: {
         select: {
           likes: true,
-          comments: true,
+          responses: true,
         },
       },
     },
