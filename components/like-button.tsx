@@ -16,7 +16,7 @@ export default function LikeButton({
 }) {
   const [state, reducerFn] = useOptimistic(
     { isLiked, likesCount },
-    (previousState, payload) => ({
+    (previousState) => ({
       isLiked: !previousState.isLiked,
       likesCount: previousState.isLiked
         ? previousState.likesCount - 2
