@@ -19,8 +19,8 @@ export default function LikeButton({
     (previousState) => ({
       isLiked: !previousState.isLiked,
       likesCount: previousState.isLiked
-        ? previousState.likesCount - 2
-        : previousState.likesCount + 2,
+        ? previousState.likesCount - 1
+        : previousState.likesCount + 1,
     })
   );
 
